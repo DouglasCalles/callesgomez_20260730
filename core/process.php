@@ -21,7 +21,7 @@ if(in_array($_SERVER["HTTP_HOST"], $host_aceptados)){
                         $msg = "";
                         $codigo_estado = 200;
                         $texto_estado = "OK";
-                        list($usec,$sec) = explode('', microtime());
+                        list($usec,$sec) = explode(' ', microtime());
                         $token = base64_encode(date("Y-m-d H:i:s", $sec).substr($usec,1));
                     }else{
                         //NO COINCIDEN LOS VALORES DE LACONTRASEÑA

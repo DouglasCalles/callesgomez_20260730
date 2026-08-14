@@ -2,7 +2,7 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<title>[COLOCAR SU NOMBRE COMPLETO Y SU NÚMERO DE CARNET]</title>
+		<title>Jose Douglas Calles Gomez - CG100122</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
@@ -17,7 +17,7 @@
 					<div class="col"></div>
 					<div class="col">
 						<div class="align-items-center">
-							<p>[colocar su nombre completo y su número de carnet]</p>
+							<p>Jose Douglas Calles Gomez - CG100122</p>
 							<form name="frm_login" id="frm_login" method="post" action="core/process.php">
 								<table>
 									<thead>
@@ -59,5 +59,29 @@
 				</div>
 			</div>
 		</div>
+
+		<script>
+			function EnviarDatos(u,p){
+				 $.post(
+					$("#frm_login").attr("action"), //EndPOint
+					{
+						txt_usuario: btoa(sha1(u)),
+						txt_password: btoa(sha1(p))
+					}).done(function(datos){
+						window.location.replace(datos.data.url+"?token="+datos.data.token);
+					}).fail(function(xhr,status,error){
+						$(".mensaje").html(xhr.responseJSON.error.message);
+					});
+				
+			}
+
+			$(document).ready(function(){
+				const form=document.querySelector('#frm_login');
+				form.addEventListener('submit',(e)=>{
+					e.preventDefault();
+					EnviarDatos($("#txt_usuario").val(),$("#txt_password").val());
+				});
+			});
+		</script>
 	</body>
 </html>
